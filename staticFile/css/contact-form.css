@@ -1,0 +1,14 @@
+.col-md-4 {
+    background: url("Img/gtr.jpg") center center no-repeat !important;
+    background-size: 300px !important;
+}
+
+.pics {
+    height: 100%;
+}
+
+.col-md-4:hover {
+    background: url("Img/gtr-1.jpg") center center no-repeat !important;
+    background-size: 300px !important;
+
+}

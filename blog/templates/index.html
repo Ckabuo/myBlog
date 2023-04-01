@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,8 +11,8 @@
     <!--------fav-icon-->
     <link rel="shortcut icon" href="favicon.icon" type="image/x-icon">
     <!-------stylesheet-------->
-    <link rel="stylesheet" href="/staticFile/index.css">
-    <link rel="stylesheet" href="/staticFile/bootstrap.css">
+    <link rel="stylesheet" href="{% static 'css\index.css' %}">
+    <link rel="stylesheet" href="{% static 'css\bootstrap.css' %}">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/f540c9d3c0.js" crossorigin="anonymous"></script>
 </head>
@@ -189,7 +190,7 @@
                         </div>
 
                         <li class="nav-item">
-                            <a class="nav-link blog" href="vincheck.html"><span style="color:red;">VIN</span>check</a>
+                            <a class="nav-link blog" href="{% url 'blog:vincheck' %}"><span style="color:red;">VIN</span>check</a>
                         </li>
                     </ul>
                     <form class="d-flex search-box" role="search">
@@ -657,8 +658,8 @@
     </script>
 
     <!-- <script src="bootstrap.min.js"></script> -->
-    <script src="/staticFile/bootstrap.bundle.js"></script>
-    <script src="/staticFile/kabus.js"></script>
+    <script src="{% static 'js\bootstrap.bundle.js' %}"></script>
+    <script src="{% static 'js\kabus.js' %}"></script>
 </body>
 
 </html>
