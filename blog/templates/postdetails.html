@@ -1,5 +1,4 @@
 {% load static %}
-{% load custom_temp %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--------title---------->
-    <title>StoryBlock.site</title>
+    <title>Kabus.com</title>
     <!--------fav-icon-->
     <link rel="shortcut icon" href="favicon.icon" type="image/x-icon">
     <!-------stylesheet-------->
@@ -25,7 +24,7 @@
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">
                     <header>
-                        <h1>StoryBlock</h1>
+                        <h1>KABUS</h1>
                     </header>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -78,7 +77,7 @@
                                     <div class="modal-body card-title row g-0">
                                         <div class="col-md-8 m-auto">
                                             <p>
-                                                StoryBlock&trade; is a rapidly expanding self-development website with
+                                                KABUS&trade; is a rapidly expanding self-development website with
                                                 information, articles,  and posts covering a variety of topics,
                                                 including automotive and technology, amongst other topics. many subjects
                                                 Our goal is to reach millions of people and provide you with
@@ -208,7 +207,7 @@
     <main>
         <article class="ps-5">
             <H2>
-                Welcome to <span> <i>StoryBlock.site</i> </span>
+                Welcome to <span> <i>Kabus.com</i> </span>
             </H2>
             <p> <b> Your No.1 Blog spot</b></p>
         </article>
@@ -221,87 +220,296 @@
             </div>
             <br>
             <!-----Box-9------>
-            {% with posts|lenn as pop %}
-                {% for i in pop|index1:0|ranger %}
-                    <div class="container row m-auto">
-                        {% if i == pop|index1:0|neg %}
-                            {% for j in pop|index1:1|ranger %}
-                                <div class="col-sm-4 blog_post" data-aos="fade-up" data-aos-delay="50" data-aos-duration="1500"
-                                    data-aos-anchor-placement="top-bottom">
-                                    {% with i|combine:j|breakr:posts as post %}
-                                        <div class="card col">
-                                            <img src="{{ post.cover_image.url }}" class="card-img-top" alt="blog" style="padding-left: 5%; padding-right: 5%; padding-top: 1%;">
-                                            <div class="card-body blog-text">
-                                                <span class="text-muted">
-                                                    <b><small>{{post.date_posted}}</small></b>
-                                                </span>
-                                                <br>
-                                                <a href="{% url 'blog:post_detail' pk=post.pk %}" class="blog-title">
-                                                    <b>
-                                                        {{post.title}}
-                                                    </b>
-                                                </a>
-                                                <p class="card-text">
-                                                    {{post.body|summ}}
-                                                </p>
-                                                <a href="{% url 'blog:post_detail' pk=post.pk %}" class="card-link ">
-                                                    <b>Read Mores</b>
-                                                </a>
-                                                <a href="{% url 'blog:delete_post' pk=post.pk %}">
-                                                    del
-                                                </a>
-                                            </div>
-                                            <div class="card-footer d-flex justify-content-evenly">
-                                                <i class="fa-regular fa-thumbs-up" onclick="myFunction(this)"></i><span id="likes1" style="position: absolute; left: 24%;bottom: 4px;">0</span>
-                                                <i class="fa-regular fa-comment"></i><span id="comments"></span>
-                                                <i class="fa-solid fa-regular fa-share-nodes"></i><span id="shares"></span>
-                                            </div>
-                                        </div>
-                                    {% endwith %}
-                                </div>
-                            {% endfor %}
-                        {% else %}
-                            {% for j in 3|ranger %}
-                                <div class="col-sm-4 blog_post" data-aos="fade-up" data-aos-delay="50" data-aos-duration="1500"
-                                data-aos-anchor-placement="top-bottom">
-                                    {% with i|combine:j|breakr:posts as para %}
-                                        <div class="card col">
-                                            <img src="{{ para.cover_image.url }}" class="card-img-top" alt="blog" style="padding-left: 5%; padding-right: 5%; padding-top: 1%;">
-                                            <div class="card-body blog-text">
-                                                <span class="text-muted">
-                                                    <b><small>{{para.date_posted}}</small></b>
-                                                </span>
-                                                <br>
-                                                <a href="{% url 'blog:post_detail' pk=para.pk %}" class="blog-title">
-                                                    <b>
-                                                        {{para.title}}
-                                                    </b>
-                                                </a>
-                                                <p class="card-text">
-                                                    {{para.body|summ}}
-                                                </p>
-                                                <a href="{% url 'blog:post_detail' pk=para.pk %}" class="card-link ">
-                                                    <b>Read Mores</b>
-                                                </a>
-                                                <a href="{% url 'blog:delete_post' pk=para.pk %}">
-                                                    del
-                                                </a>
-                                            </div>
-                                            <div class="card-footer d-flex justify-content-evenly">
-                                                <i class="fa-regular fa-thumbs-up" onclick="myFunction(this)"></i><span id="likes1" style="position: absolute; left: 24%;bottom: 4px;">0</span>
-                                                <i class="fa-regular fa-comment"></i><span id="comments"></span>
-                                                <i class="fa-solid fa-regular fa-share-nodes"></i><span id="shares"></span>
-                                            </div>
-                                        </div>
-                                    {% endwith %}
-                                </div>
-                            {% endfor %}
-                        {% endif %}
+            <div class="container row m-auto">
+                <div class="col-sm-4 blog_post" data-aos="fade-up" data-aos-delay="50" data-aos-duration="1500"
+                    data-aos-anchor-placement="top-bottom">
+                    <div class="card col">
+                        <img src="img/2020-Kia-Rio-fourth-generation.jpg" class="card-img-top" alt="blog">
+                        <div class="card-body blog-text">
+                            <span class="text-muted">
+                                <b><small>25 August 2022</small></b>
+                            </span>
+                            <br>
+                            <a href="blog-post-4.html" class="blog-title">
+                                <b>
+                                    WHY THIS KIA RIO IS THE BEST FIRST CAR FOR EVERY YOUNG WORKING
+                                    NIGERIAN
+                                </b>
+                            </a>
+                            <p class="card-text">
+                                Currently, I own the one vehicle that properly represents the Nigerian working class of
+                                between the
+                                ages of 24 and 32 (I'm talking...
+                            </p>
+                            <a href="blog-post-4.html" class="card-link ">
+                                <b>Read Mores</b>
+                            </a>
+                        </div>
+                        <div class="card-footer d-flex justify-content-evenly">
+                            <i class="fa-regular fa-thumbs-up" onclick="myFunction(this)"></i><span id="likes1" style="position: absolute; left: 24%;bottom: 4px;">0</span>
+                            <i class="fa-regular fa-comment"></i><span id="comments"></span>
+                            <i class="fa-solid fa-regular fa-share-nodes"></i><span id="shares"></span>
+                        </div>
                     </div>
-                {% endfor %}
-            {% endwith %}
+                </div>
+                <!-----Box-8------>
+                <div class="col-sm-4 blog_post" data-aos="fade-up" data-aos-delay="50" data-aos-duration="1500"
+                    data-aos-anchor-placement="top-bottom">
+                    <div class="card col">
+                        <img src="img/2020-Kia-Rio-fourth-generation.jpg" class="card-img-top" alt="blog">
+                        <div class="card-body blog-text">
+                            <span class="text-muted">
+                                <b><small>25 August 2022</small></b>
+                            </span>
+                            <br>
+                            <a href="blog-post-4.html" class="blog-title">
+                                <b>
+                                    WHY THIS KIA RIO IS THE BEST FIRST CAR FOR EVERY YOUNG WORKING
+                                    NIGERIAN
+                                </b>
+                            </a>
+                            <p class="card-text">
+                                Currently, I own the one vehicle that properly represents the Nigerian working class of
+                                between the
+                                ages of 24 and 32 (I'm talking...
+                            </p>
+                            <a href="blog-post-4.html" class="card-link">
+                                <b>Read Mores</b>
+                            </a>
+                        </div>
+                        <div class="card-footer d-flex justify-content-evenly">
+                            <i class="fa-regular fa-thumbs-up" onclick="myFunction(this)"></i><span id="likes2" style="position: absolute; left: 24%;bottom: 4px;">0</span>
+                            <i class="fa-regular fa-comment"></i><span id="comments"></span>
+                            <i class="fa-solid fa-regular fa-share-nodes"></i><span id="shares"></span>
+                        </div>
+                    </div>
+                </div>
+                <!-----Box-7------>
+                <div class="col-sm-4 blog_post" data-aos="fade-up" data-aos-delay="50" data-aos-duration="1500"
+                    data-aos-anchor-placement="top-bottom">
+                    <div class="card col">
+                        <img src="img/2020-Kia-Rio-fourth-generation.jpg" class="card-img-top" alt="blog">
+                        <div class="card-body blog-text">
+                            <span class="text-muted">
+                                <b><small>31 January 2023</small></b>
+                            </span>
+                            <br>
+                            <a href="blog-post-7.html" class="blog-title">
+                                <b>
+                                    Electric and Hybrid Vehicles: Technology Advancements and Market Trends
+                                </b>
+                            </a>
+                            <p class="card-text">
+                                The global automotive industry has been undergoing significant changes in recent years...
+                            </p>
+                            <a href="blog-post-7.html" class="card-link">
+                                <b>Read Mores</b>
+                            </a>
+                        </div>
+                        <div class="card-footer d-flex justify-content-evenly">
+                            <i class="fa-regular fa-thumbs-up" onclick="myFunction(this)"></i><span id="likes3" style="position: absolute; left: 24%;bottom: 4px;">0</span>
+                            <i class="fa-regular fa-comment"></i><span id="comments"></span>
+                            <i class="fa-solid fa-regular fa-share-nodes"></i></i><span id="shares"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <br>
+            <!-----Box-6------>
+            <div class="container row m-auto">
+                <div class="col-sm-4 blog_post" data-aos="fade-up" data-aos-delay="50" data-aos-duration="1500"
+                    data-aos-anchor-placement="top-bottom">
+                    <div class="card col">
+                        <a href="blog-post-6.html">
+                            <img src="img/IMG-blogpost-6.jpg" class="card-img-top" alt="blog">
+                        </a>
+                        
+                        <div class="card-body blog-text">
+                            <span class="text-muted">
+                                <b><small>25 December 2022</small></b>
+                            </span>
+                            <br>
+                            <a href="blog-post-6.html" class="blog-title">
+                                <b class="text-uppercase">
+                                    10 cool cars that would be discontinued by 2023
+                                </b>
+                            </a>
+                            <p class="card-text">
+                                In just a few short months, manufacture on these ten sports vehicles will cease.  
+                                If you've been considering purchasing one of these models...
+                            </p>
+                            <a href="blog-post-6.html" class="card-link">
+                                <b>Read Mores</b>
+                            </a>
+                        </div>
+                        <div class="card-footer d-flex justify-content-evenly">
+                            <i class="fa-regular fa-thumbs-up" onclick="myFunction(this)"></i><span id="likes4" style="position: absolute; left: 24%;bottom: 4px;">0</span>
+                            <i class="fa-regular fa-comment"></i><span id="comments"></span>
+                            <i class="fa-solid fa-regular fa-share-nodes"></i></i><span id="shares"></span>
+                        </div>
+                    </div>
+                </div>
+                <!-----Box-5------>
+                <div class="col-sm-4 blog_post" data-aos="fade-up" data-aos-delay="50" data-aos-duration="1500"
+                    data-aos-anchor-placement="top-bottom">
+                    <div class="card col">
+                        <img src="img/IMG-blogpost-5.jpg" class="card-img-top" alt="blog">
+                        <div class="card-body blog-text">
+                            <span class="text-muted">
+                                <b><small>2 October 2022</small></b>
+                            </span>
+                            <br>
+                            <a href="blog-post-5.html" class="blog-title">
+                                <b>
+                                    BEST TWO MILLION NAIRA CARS IN NIGERIA
+                                </b>
+                            </a>
+                            <p class="card-text ">
+                                Currently, I own the one vehicle that properly represents the Nigerian working class of
+                                between the
+                                ages of 24 and 32 (I'm talking...
+                            </p>
+                            <a href="blog-post-5.html" class="card-link">
+                                <b>Read Mores</b>
+                            </a>
+                        </div>
+                        <div class="card-footer d-flex justify-content-evenly">
+                            <i class="fa-regular fa-thumbs-up" onclick="myFunction(this)"></i><span id="likes5" style="position: absolute; left: 24%;bottom: 4px;">0</span>
+                            <i class="fa-regular fa-comment"></i><span id="comments"></span>
+                            <i class="fa-solid fa-regular fa-share-nodes"></i></i><span id="shares"></span>
+                        </div>
+                    </div>
+                </div>
+                <!-----Box-4------>
+                <div class="col-sm-4 blog_post" data-aos="fade-up" data-aos-delay="50" data-aos-duration="1500"
+                    data-aos-anchor-placement="top-bottom">
+                    <div class="card col">
+                        <img src="img/2020-Kia-Rio-fourth-generation.jpg" class="card-img-top" alt="blog">
+                        <div class="card-body blog-text">
+                            <span class="text-muted">
+                                <b><small>25 August 2022</small></b>
+                            </span>
+                            <br>
+                            <a href="blog-post-4.html" class="blog-title">
+                                <b>
+                                    WHY THIS KIA RIO IS THE BEST FIRST CAR FOR EVERY YOUNG WORKING NIGERIAN
+                                </b>
+                            </a>
+                            <p class="card-text">
+                                Currently, I own the one vehicle that properly represents the Nigerian working class of
+                                between the
+                                ages of 24 and 32 (I'm talking...
+                            </p>
+                            <a href="blog-post-4.html" class="card-link">
+                                <b>Read Mores</b>
+                            </a>
+                        </div>
+                        <div class="card-footer d-flex justify-content-evenly">
+                            <i class="fa-regular fa-thumbs-up" onclick="myFunction(this)"></i><span id="likes6" style="position: absolute; left: 24%;bottom: 4px;">0</span>
+                            <i class="fa-regular fa-comment"></i><span id="comments"></span>
+                            <i class="fa-solid fa-regular fa-share-nodes"></i></i><span id="shares"></span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <br>
+            <!-----Box-3------>
+            <div class="container row m-auto">
+                <div class="col-sm-4 blog_post" data-aos="fade-up" data-aos-delay="50" data-aos-duration="1500"
+                    data-aos-anchor-placement="top-bottom">
+                    <div class="card col">
+                        <img src="Img/evolution of kia rio.jpg" class="card-img-top" alt="blog">
+                        <div class="card-body blog-text">
+                            <span class="text-muted">
+                                <b><small>22 August 2022</small></b>
+                            </span>
+                            <br>
+                            <a href="blog-post-3.html" class="blog-title">
+                                <b>
+                                    The history and Evolution of kia Rio
+                                </b>
+                            </a>
+                            <p class="card-text">
+                                The Kia Rio is a subcompact car manufactured by Kia motors since November 1999. Since
+                                its debut in August 2000, the Kia Rio has gone...
+                            </p>
+                            <a href="blog-post-3.html" class="card-link">
+                                <b>Read Mores</b>
+                            </a>
+                        </div>
+                        <div class="card-footer d-flex justify-content-evenly">
+                            <i class="fa-regular fa-thumbs-up" onclick="myFunction(this)"></i><span id="likes7" style="position: absolute; left: 24%;bottom: 4px;">0</span>
+                            <i class="fa-regular fa-comment"></i><span id="comments"></span>
+                            <i class="fa-solid fa-regular fa-share-nodes"></i></i><span id="shares"></span>
+                        </div>
+                    </div>
+                </div>
+                <!-----Box-2------>
+                <div class="col-sm-4 blog_post" data-aos="fade-up" data-aos-delay="50" data-aos-duration="1500"
+                    data-aos-anchor-placement="top-bottom">
+                    <div class="card col">
+                        <img src="Img/CAB70HOC011B0101.jpg" class="card-img-top" alt="blog">
+                        <div class="card-body blog-text">
+                            <span class="text-muted">
+                                <b><small>8 june 2022</small></b>
+                            </span>
+                            <br>
+                            <a href="blog-post-2.html" class="blog-title">
+                                <b>
+                                    Evolution of Honda Accord
+                                </b>
+                            </a>
+                            <p class="card-text">
+                                The Honda Accord is a line of automobiles made by Honda since 1976, best known for its
+                                four-door sedan model, which has been one of the...
+                            </p>
+                            <a href="blog-post-2.html" class="card-link">
+                                <b>Read Mores</b>
+                            </a>
+                        </div>
+                        <div class="card-footer d-flex justify-content-evenly">
+                            <i class="fa-regular fa-thumbs-up" onclick="myFunction(this)"></i><span id="likes8" style="position: absolute; left: 24%;bottom: 4px;">0</span>
+                            <i class="fa-regular fa-comment"></i><span id="comments"></span>
+                            <i class="fa-solid fa-regular fa-share-nodes"></i></i><span id="shares"></span>
+                        </div>
+                    </div>
+                </div>
+                <!-----Box-1------>
+                <div class="col-sm-4 blog_post" data-aos="fade-up" data-aos-delay="50" data-aos-duration="1500"
+                    data-aos-anchor-placement="top-bottom">
+                    <div class="card col">
+                        <img src="Img/Manual_Layout4d.svg.png" class="card-img-top" alt="blog">
+                        <div class="card-body blog-text">
+                            <span class="text-muted">
+                                <b><small>13 May 2022</small></b>
+                            </span>
+                            <br>
+                            <a href="blog-post.html" class="blog-title">
+                                <b>
+                                    What Has Happened to All the Manual Transmissions?
+                                </b>
+                            </a>
+                            <p class="card-text">
+                                A manual transmission (MT), also known as a manual gearbox, standard transmission (in
+                                Canada, the United Kingdom, and the United...
+                            </p>
+                            <a href="blog-post.html" class="card-link">
+                                <b>Read Mores</b>
+                            </a>
+                        </div>
+                        <div class="card-footer d-flex justify-content-evenly">
+                            <i class="fa-regular fa-thumbs-up" onclick="myFunction(this)"></i><span id="likes9" style="position: absolute; left: 24%;bottom: 4px;">0</span>
+                            <i class="fa-regular fa-comment"></i><span id="comments"></span>
+                            <i class="fa-solid fa-regular fa-share-nodes"></i><span id="shares"></span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
         </section>
         <br>
         <button onclick="topFunction()" id="myBtn" title="Go to top" style="border-radius:75%;
@@ -317,25 +525,13 @@
                 <h2>Subscribe</h3>
                     <p>Subscribe Now To Get Daily Updates</p>
             </div>
-            <form method="post" enctype="multipart/form-data">
-                <div class="sub-form" id="subscribe">
-                
-                    {% csrf_token %}
-                    <div class="form-group">
-                    <div class="sub-mail" id="email">{{ form.email }}</div>
-                    </div>
-                    <button type="submit" class="btn-default">SUBSCRIBE</button>
-                
-                </div>
-            </form>
-            <!-- <div class="sub-form" id="subscribe">
-                <form method="post", enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <div class="sub-mail" id="email">{{ form.email }}</div>
+            <div class="sub-form" id="subscribe">
+                <form action="#">
+                    <input type="email" name="email" id="email" placeholder="Email Address" class="sub-mail">
                     <button type="submit" class="btn-default">SUBSCRIBE</button>
                 </form>
             </div>
-            <div class="ps-3"> -->
+            <div class="ps-3">
                 <!-- Button trigger modal -->
                 <p class="pt-3 sub-content" data-bs-toggle="modal" data-bs-target="#AdvertModal">
                     <a href="#">Advertise with us</a>
