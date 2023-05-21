@@ -1,23 +1,34 @@
-from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect, reverse
-from .forms import PostForm, SubForm
-from .models import Post, BlogPost
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect
+from .forms import PostForm, SubForm, CreateCategoryForm, ContactForm
+from .models import Post, BlogPost, Category
 import os
+from django.urls import reverse
+from django.views.generic import DetailView
 
 # Create your views here.
-def home(request):
+def home(request, c_filter= ""):
     posts = Post.objects.all()
+    categories = Category.objects.all()
+    if len(c_filter) !=0:
+        posts = posts.filter(categories__slug=c_filter)
     if request.method == 'POST':
-        print(10)
+        c_form = ContactForm(request.POST)
+        # print(c_form )
         form = SubForm(request.POST)
-        print(form)
-        # if form.is_valid():
-        #     post = form.save(commit=False)
-        #     post.save()
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+        if c_form.is_valid():
+            c_form.save()
+            # post = c_form.save(commit=False)
+            # post.save()
+            # c_form.save_m2m()
             
         return redirect('home')
     else:
         form = SubForm()
-    return render(request, 'index.html', {"posts": posts, "form": form})
+        cont_form = ContactForm()
+    return render(request, 'index.html', {"posts": posts, "form": form,'categories': categories, 'cont_form': cont_form})
 
 def get_anon_user_id(request):
     return request.META.get('REMOTE_ADDR')
@@ -36,6 +47,17 @@ def BlogPostLike(request, pk):
     post.save()
     return HttpResponseRedirect(reverse('blogpost-detail', args=[str(pk)]))
 
+class BlogPostDetailView(DetailView):
+    # ...
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        anon_likes_connected = get_object_or_404(BlogPost, id=self.kwargs['pk'])
+        anon_user_id = get_anon_user_id(self.request)
+        anon_likes_list = anon_likes_connected.anon_likes.split(',') if anon_likes_connected.anon_likes else []
+        anon_liked = anon_user_id in anon_likes_list
+        data['number_of_anon_likes'] = len(anon_likes_list)
+        data['post_is_anon_liked'] = anon_liked
+        return data
 
 def vincheck(request):
     return render(request, 'vincheck.html')
@@ -47,6 +69,7 @@ def create_post(request):
             post = form.save(commit=False)
             # post.author = request.user
             post.save()
+            form.save_m2m()
             
             return redirect('blog:post_detail', pk=post.pk)
     else:
@@ -67,5 +90,36 @@ def delete_post(request, pk):
 def post_detail(request, pk):
     post = Post.objects.get(pk=pk)
     post.body = post.body.split("\n")
+    # print(post.categories())
     return render(request, 'blog_template.html', {'post': post})
 
+
+def manage_slugs(request):
+    categories_exist = Category.objects.all().exists()
+    categories = Category.objects.all()
+    return render(request, 'manage_slugs.html', {'categories': categories, 'cat_exist': categories_exist})
+
+def delete_category(request, slug):
+    category = get_object_or_404(Category, slug=slug)
+    category.delete()
+    return redirect('category_list')
+
+def create_category(request):
+    if request.method == 'POST':
+        form = CreateCategoryForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            slug = form.cleaned_data['slug']
+            i = 0
+            while Category.objects.filter(slug=slug).exists():
+                i += 1
+                slug = f'{slug}-{i}'
+            category = Category.objects.create(name=name, slug=slug)
+            form = CreateCategoryForm()
+            return redirect('create_category')
+    else:
+        form = CreateCategoryForm()
+    # print(form.as_p())
+    # print(9)
+    categories = Category.objects.all()
+    return render(request, 'create_category.html', {'form': form, 'categories': categories})

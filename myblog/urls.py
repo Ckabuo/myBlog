@@ -20,9 +20,15 @@ from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
+# from .views import delete_category
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
     path("blog/",include(("blog.urls","blog"), namespace= "blog")),
     path('Cposts/', views.create_post, name='create_post'),
+    path('blogpost-like/<int:pk>', views.BlogPostLike, name="blogpost_like"),
+    path('categories/<slug:slug>/delete/', views.delete_category, name='delete_category'),
+    path('categories/', views.manage_slugs, name= "manage_slugs"),
+    path('create_category/', views.create_category, name='create_category'),
+    path('posts/<str:c_filter>/', views.home, name='filt_post_list'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

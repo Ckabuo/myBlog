@@ -2,8 +2,15 @@
 from collections import Counter as cntr
 from django import template
 import json
+import markdown2 as mk
+from django.utils.safestring import mark_safe
 
 register = template.Library()
+
+@register.filter
+def Marking(value):
+    # print(mark_safe(mk.markdown(value)))
+    return mark_safe(mk.markdown(value))
 
 @register.filter
 def ranger(value):
