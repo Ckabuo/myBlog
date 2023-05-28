@@ -6,6 +6,7 @@
   </button>
   <h1>Create a New Category</h1>
   <hr>
+<div class="container-fluid card">
   Avalible Categories:
     {% for category in categories %}
     <label style="background-color: aqua; padding: 3px;border-radius: 3px;padding-top:0px;">{{ category.name }}</label>
@@ -19,4 +20,20 @@
         {{ form.as_p }}
     <button type="submit" class="btn btn-primary">Create</button>
   </form>
+</div>
+<style>
+   .container-fluid{
+    
+    text-align: center;
+    }
+    
+    /* textarea.form-control{
+      min-height: 400px; */
+    /* }
+    .btn{
+      background-color: #ff000f;
+      color: #fff
+      ;
+    } */
+</style>
 {% endblock %}
