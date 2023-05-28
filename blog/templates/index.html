@@ -185,7 +185,12 @@
                         </div>
 
                         <li class="nav-item">
-                            <a class="nav-link blog" href="{% url 'blog:vincheck' %}"><span style="color:red;">VIN</span>check</a>
+                            <a class="nav-link blog" href="{% url 'blog:vincheck' %}">
+                                <span style="color:red;">VIN</span>check
+                                <span class="position-absolute translate-middle p-2 bg-danger rounded-circle" style="background-color: #ff000f !important; ">
+                                    <span class="visually-hidden">Coming Soon</span>
+                                </span>
+                            </a>
                         </li>
                     </ul>
                     <form class="d-flex search-box" role="search">
@@ -309,7 +314,11 @@
         <div class="subscribe">
             <div class="sub-header">
                 <h2>Subscribe</h3>
-                    <p>Subscribe Now To Get Daily Updates</p>
+                <p>Subscribe Now To Get Daily Updates</p>
+                <div class="form-check form-switch ps-5">
+                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                    <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                </div> 
             </div>
             <form method="post" enctype="multipart/form-data">
                 <div class="sub-form" id="subscribe">
@@ -328,8 +337,9 @@
                     <div class="sub-mail" id="email">{{ form.email }}</div>
                     <button type="submit" class="btn-default">SUBSCRIBE</button>
                 </form>
-            </div>
-            <div class="ps-3"> -->
+            </div> -->
+            <div class="ps-3">
+                
                 <!-- Button trigger modal -->
                 <p class="pt-3 sub-content" data-bs-toggle="modal" data-bs-target="#AdvertModal">
                     <a href="#">Advertise with us</a>
@@ -432,8 +442,8 @@
     </section>
 
     <footer class="bg-primary">
-        <p class="copyright"> <b> copyright 2022 KABUS&trade;</b></p>
-        <a href="">
+        <p class="copyright"> <b> copyright 2022 StoryBlock&trade;</b></p>
+        <a href="https://wa.me/+2348148839628?text=Hi,StoryBlock.%20I,m ___">
             <i class="fa-brands fa-whatsapp"></i>
         </a>
         <a href="">
@@ -456,6 +466,7 @@
     </script>
 
     <!-- <script src="bootstrap.min.js"></script> -->
+    <!-- <script src="{% static 'js\bootstrap.bundle.min.js' %}"></script> -->
     <script src="{% static 'js\bootstrap.bundle.js' %}"></script>
     <script src="{% static 'js\kabus.js' %}"></script>
 </body>
