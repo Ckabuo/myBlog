@@ -2,6 +2,9 @@
 {% block content %}
 
   <div class="container">
+    <button class="btn-primary" style="float: right; margin-top: 10px;">
+      <a href="{% url 'home' %}" style="color: #000; text-decoration: none;"> Back </a>
+    </button>
     <h2>Create a new post</h2>
     <hr>
     {% if form.errors %}
@@ -29,7 +32,7 @@
         <div>{{ form.cover_image }}</div>
       </div>
 
-      <button type="submit" class="btn btn-primary">Save</button>
+      <button type="submit" class="btn btn-primary" style="">Save</button>
     </form>
   </div>
 

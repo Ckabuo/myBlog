@@ -53,6 +53,20 @@
                                 <li><a class="dropdown-item" href="{% url 'home' %}"> All </a></li>
                             </ul>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle blog" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Admin
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{% url 'create_category' %}">Create Category </a></li>    
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                <li><a class="dropdown-item" href="{% url 'create_post' %}">Create Post </a></li>    
+                            </ul>
+                        </li>
+    
                         <!-- <li class="nav-item">
                             <a class="nav-link blog" href="#">Reviews</a>
                         </li> -->
@@ -316,12 +330,12 @@
                 <h2>Subscribe</h3>
                 <p>Subscribe Now To Get Daily Updates</p>
                 <div class="form-check form-switch ps-5">
-                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" data-bs-toggle="modal" data-bs-target="#adminModal">
                     <label class="form-check-label" for="flexSwitchCheckDefault"></label>
                 </div> 
             </div>
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="adminModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
