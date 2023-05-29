@@ -2,7 +2,7 @@
 
 {% block content %}
   <button class="btn btn-primary" style="float: right; margin-top: 10px;">
-    <a href="{% url 'manage_slugs' %}" style="color: white;">Manage</a>
+    <a href="{% url 'manage_slugs' %}" style="color: #000; text-decoration: none;">Manage</a>
   </button>
   <h1>Create a New Category</h1>
   <hr>
@@ -18,7 +18,7 @@
   <form method="post">
     {% csrf_token %}
         {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">Create</button>
+    <button type="submit" class="btn btn-primary" style="background-color: #0d6efd; color: #fff;">Create</button>
   </form>
 </div>
 <style>
