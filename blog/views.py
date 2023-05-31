@@ -1,14 +1,21 @@
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect
 from .forms import PostForm, SubForm, CreateCategoryForm, ContactForm
+from .forms import SignupForm
 from .models import Post, BlogPost, Category
+from django.contrib.auth.forms import UserCreationForm,UserChangeForm
 import os
-from django.urls import reverse
+from django.contrib.auth import logout
+from django.contrib.auth.views import LoginView
+from django.urls import reverse, reverse_lazy
 from django.views.generic import DetailView
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 # Create your views here.
 def home(request, c_filter= ""):
     posts = Post.objects.all()
     categories = Category.objects.all()
+    is_admin = request.user.is_staff or request.user.is_superuser
     if len(c_filter) !=0:
         posts = posts.filter(categories__slug=c_filter)
     if request.method == 'POST':
@@ -28,7 +35,7 @@ def home(request, c_filter= ""):
     else:
         form = SubForm()
         cont_form = ContactForm()
-    return render(request, 'index.html', {"posts": posts, "form": form,'categories': categories, 'cont_form': cont_form})
+    return render(request, 'index.html', {"posts": posts, "form": form,'categories': categories, 'cont_form': cont_form, 'is_admin':is_admin})
 
 def get_anon_user_id(request):
     return request.META.get('REMOTE_ADDR')
@@ -62,6 +69,8 @@ class BlogPostDetailView(DetailView):
 def vincheck(request):
     return render(request, 'vincheck.html')
 
+@login_required
+@user_passes_test(lambda u: u.is_staff)
 def create_post(request):
     if request.method == 'POST':
         form = PostForm(request.POST,request.FILES)
@@ -76,6 +85,8 @@ def create_post(request):
         form = PostForm()
     return render(request, 'create_post.html', {'form': form})
 
+@login_required
+@user_passes_test(lambda u: u.is_staff)
 def delete_post(request, pk):
     post = get_object_or_404(Post, pk=pk)
     # for image in post.image_set.all():
@@ -93,17 +104,22 @@ def post_detail(request, pk):
     # print(post.categories())
     return render(request, 'blog_template.html', {'post': post})
 
-
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
 def manage_slugs(request):
     categories_exist = Category.objects.all().exists()
     categories = Category.objects.all()
     return render(request, 'manage_slugs.html', {'categories': categories, 'cat_exist': categories_exist})
 
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
 def delete_category(request, slug):
     category = get_object_or_404(Category, slug=slug)
     category.delete()
     return redirect('category_list')
 
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
 def create_category(request):
     if request.method == 'POST':
         form = CreateCategoryForm(request.POST)
@@ -123,3 +139,55 @@ def create_category(request):
     # print(9)
     categories = Category.objects.all()
     return render(request, 'create_category.html', {'form': form, 'categories': categories})
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('home')
+
+class CustomLoginView(LoginView):
+    template_name = 'login.html'
+    success_url = reverse_lazy('home')
+
+
+# from django.contrib.auth.forms import UserCreationForm
+
+def signup(request):
+    if request.method == 'POST':
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    else:
+        form = SignupForm()
+    return render(request, 'signup.html', {'form': form})
+
+
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
+def delete_user(request, user_id):
+    user = User.objects.get(id=user_id)
+    user.delete()
+    return redirect(reverse('manage_users'))
+
+
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
+def edit_user(request, user_id):
+    user = get_object_or_404(User, id=user_id)
+    if request.method == 'POST':
+        form = UserChangeForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('manage_users')
+    else:
+        form = UserChangeForm(instance=user)
+    return render(request, 'edit_user.html', {'form': form})
+
+
+
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
+def manage_accounts(request):
+    users = User.objects.all()
+    return render(request, 'manage_accounts.html', {'users': users})

@@ -90,6 +90,23 @@ function vinCheckMethods(id) {
   }
 }
 
+//JS for the Admin toogle buttom
+// Get the toggle button element
+const toggleButton = document.getElementById('flexSwitchCheckDefault');
+
+// Get the modal element
+const modal = document.getElementById('adminModal');
+
+// Add event listener to the toggle button
+toggleButton.addEventListener('change', function() {
+  // Check if the toggle button is switched on
+  if (toggleButton.checked) {
+    // Show the modal
+    $(modal).modal('show');
+  }
+});
+
+
 /*
 //Blog post Automatic Upload
 

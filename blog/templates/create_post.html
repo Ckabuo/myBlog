@@ -2,6 +2,9 @@
 {% block content %}
 
   <div class="container">
+    <button class="btn-primary" style="float: right; margin-top: 10px;">
+      <a href="{% url 'home' %}" style="color: #000; text-decoration: none;"> Back </a>
+    </button>
     <h2>Create a new post</h2>
     <hr>
     {% if form.errors %}
@@ -34,8 +37,20 @@
   </div>
 
   <style>
+    form{
+      justify-content: center;
+      align-items: center;
+      display: grid;
+      height: 100vh;
+    }
+    
     textarea.form-control{
       min-height: 400px;
+    }
+    .btn{
+      background-color: #ff000f;
+      color: #fff
+      ;
     }
   </style>
 {% endblock %}
