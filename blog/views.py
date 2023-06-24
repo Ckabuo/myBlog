@@ -35,7 +35,7 @@ def home(request, c_filter= ""):
     else:
         form = SubForm()
         cont_form = ContactForm()
-    return render(request, 'index.html', {"posts": posts, "form": form,'categories': categories, 'cont_form': cont_form, 'is_admin':is_admin})
+    return render(request, 'index.html', {"posts": posts, "Subform": form,'categories': categories, 'cont_form': cont_form, 'is_admin':is_admin})
 
 def get_anon_user_id(request):
     return request.META.get('REMOTE_ADDR')
@@ -146,7 +146,7 @@ def logout_view(request):
     return redirect('home')
 
 class CustomLoginView(LoginView):
-    template_name = 'login.html'
+    template_name = 'index.html'#'login.html'
     success_url = reverse_lazy('home')
 
 
@@ -183,7 +183,6 @@ def edit_user(request, user_id):
     else:
         form = UserChangeForm(instance=user)
     return render(request, 'edit_user.html', {'form': form})
-
 
 
 @login_required

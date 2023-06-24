@@ -333,19 +333,26 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                    <form action="">
+                    <form method="post">
+                        {% csrf_token %}
                         <div class="form-floating">
-                            <input type="email" name="email" class="form-control"
-                                id="floatingInput" placeholder="name@example.com">
-                            <label for="floatingInput">
-                                Your Email address
-                            </label>
+                            <input type="text" name="username" autofocus="" autocapitalize="none" 
+                            autocomplete="username" maxlength="150" required="" id="id_username" 
+                            fdprocessedid="k0j3b9">
+                            <!-- <input type="email" name="email" class="form-control"
+                                id="floatingInput" placeholder="name@example.com"> -->
+                            <!-- <label for="floatingInput">
+                                Your Username
+                            </label> -->
                         </div> <br>
                         <div class="form-floating">
-                            <input type="password" name="password" class="form-control"
-                                id="password" placeholder="password">
-                            <label for="password">Password</label>
+                            <input type="password" name="password" autocomplete="current-password" 
+                            required="" id="id_password" fdprocessedid="pagkog">
+                            <!-- <input type="password" name="password" class="form-control"
+                                id="password" placeholder="password"> -->
+                            <!-- <label for="password">Password</label> -->
                         </div> <br>
+                        <!-- <button type="submit" class="btn btn-primary">Login</button> -->
                         <button type="submit" class="btn btn-outline-primary">
                             SEND
                         </button>
@@ -362,21 +369,13 @@
                 
                     {% csrf_token %}
                     <div class="form-group">
-                    <div class="sub-mail" id="email">{{ form.email }}</div>
+                    <div class="sub-mail" id="email">{{ Subform.email }}</div>
                     </div>
                     <button type="submit" class="btn-default">SUBSCRIBE</button>
                 
                 </div>
             </form>
-            <!-- <div class="sub-form" id="subscribe">
-                <form method="post", enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <div class="sub-mail" id="email">{{ form.email }}</div>
-                    <button type="submit" class="btn-default">SUBSCRIBE</button>
-                </form>
-            </div> -->
             <div class="ps-3">
-                
                 <!-- Button trigger modal -->
                 <p class="pt-3 sub-content" data-bs-toggle="modal" data-bs-target="#AdvertModal">
                     <a href="#">Advertise with us</a>
