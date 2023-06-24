@@ -356,6 +356,14 @@
                         <button type="submit" class="btn btn-outline-primary">
                             SEND
                         </button>
+                        <div class="card-footer">
+                            --------------------------New to the blog?------------------------
+                          <div class="nav-item {% if request.resolver_match.url_name == 'signup' %}active{% endif %}">
+                            <button class="btn btn-secondary" style="width: 100%; margin-top: 10px;">
+                              <a class="nav-link" href="{% url 'signup' %}" style="color: white;">Register as a worker</a>
+                            </button>
+                          </div>
+                        </div>
                     </form>
                 </div>
                     <div class="modal-footer">
