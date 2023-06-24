@@ -15,7 +15,8 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 def home(request, c_filter= ""):
     posts = Post.objects.all()
     categories = Category.objects.all()
-    is_admin = request.user.is_staff or request.user.is_superuser
+    is_admin = request.user.is_staff
+    is_superior = request.user.is_superuser
     if len(c_filter) !=0:
         posts = posts.filter(categories__slug=c_filter)
     if request.method == 'POST':
@@ -35,7 +36,7 @@ def home(request, c_filter= ""):
     else:
         form = SubForm()
         cont_form = ContactForm()
-    return render(request, 'index.html', {"posts": posts, "Subform": form,'categories': categories, 'cont_form': cont_form, 'is_admin':is_admin})
+    return render(request, 'index.html', {"posts": posts, "Subform": form,'categories': categories, 'cont_form': cont_form, 'is_admin':is_admin, 'is_super': is_superior})
 
 def get_anon_user_id(request):
     return request.META.get('REMOTE_ADDR')
@@ -146,9 +147,9 @@ def logout_view(request):
     return redirect('home')
 
 class CustomLoginView(LoginView):
-    template_name = 'index.html'#'login.html'
+    # check if the person is a staff
+    template_name = 'login.html'
     success_url = reverse_lazy('home')
-
 
 # from django.contrib.auth.forms import UserCreationForm
 

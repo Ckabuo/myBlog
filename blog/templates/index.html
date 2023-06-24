@@ -50,9 +50,10 @@
                                         <hr class="dropdown-divider">
                                     </li>
                                 {% endfor %}
-                                <li><a class="dropdown-item" href="{% url 'home' %}"> None </a></li>
+                                <li><a class="dropdown-item" href="{% url 'home' %}"> All </a></li>
                             </ul>
                         </li>
+
                         <!-- <li class="nav-item">
                             <a class="nav-link blog" href="#">Reviews</a>
                         </li> -->
@@ -183,15 +184,40 @@
                                 </div>
                             </div>
                         </div>
+                        {% if not is_admin %}
+                            <li class="nav-item">
+                                <a class="nav-link blog" href="{% url 'blog:vincheck' %}">
+                                    <span style="color:red;">VIN</span>check
+                                    <span class="position-absolute translate-middle p-2 bg-danger rounded-circle" style="background-color: #ff000f !important; ">
+                                        <span class="visually-hidden">Coming Soon</span>
+                                    </span>
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if is_admin %}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle blog" href="#" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    AdminFunctions
+                                </a>
+                                <ul class="dropdown-menu">
+                                    {% if is_super %}
+                                        <li><a class="dropdown-item" href="{% url 'manage_users' %}"> Manage Users </a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item" href="{% url 'manage_slugs' %}"> Manage Slugs </a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item" href="{% url 'create_category' %}"> Create Category </a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                    {% endif %}
+                                    <li><a class="dropdown-item" href="{% url 'create_post' %}"> Create Post </a></li>
+                                    
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link blog" href="{% url 'logout' %}">LogOut</a>
+                            </li>
+                        {% endif %}
 
-                        <li class="nav-item">
-                            <a class="nav-link blog" href="{% url 'blog:vincheck' %}">
-                                <span style="color:red;">VIN</span>check
-                                <span class="position-absolute translate-middle p-2 bg-danger rounded-circle" style="background-color: #ff000f !important; ">
-                                    <span class="visually-hidden">Coming Soon</span>
-                                </span>
-                            </a>
-                        </li>
                     </ul>
                     <form class="d-flex search-box" role="search">
                         <input class="form-control me-2" type="search" id="search" name="search" placeholder="Search..."
@@ -246,7 +272,7 @@
                                                 <a href="{% url 'blog:post_detail' pk=post.pk %}" class="card-link ">
                                                     <b>Read Mores</b>
                                                 </a>
-                                                {% if is_admin %}
+                                                {% if is_super %}
                                                     <a href="{% url 'blog:delete_post' pk=post.pk %}">
                                                         del
                                                     </a>
@@ -284,7 +310,7 @@
                                                 <a href="{% url 'blog:post_detail' pk=para.pk %}" class="card-link ">
                                                     <b>Read Mores</b>
                                                 </a>
-                                                {% if is_admin %}
+                                                {% if is_super %}
                                                     <a href="{% url 'blog:delete_post' pk=para.pk %}">
                                                         del
                                                     </a>
@@ -319,10 +345,12 @@
             <div class="sub-header">
                 <h2>Subscribe</h3>
                 <p>Subscribe Now To Get Daily Updates</p>
-                <div class="form-check form-switch ps-5">
-                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" data-bs-toggle="modal" data-bs-target="#adminModal">
-                    <label class="form-check-label" for="flexSwitchCheckDefault"></label>
-                </div> 
+                {% if not is_admin %}
+                    <div class="form-check form-switch ps-5">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" data-bs-toggle="modal" data-bs-target="#adminModal">
+                        <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                    </div>
+                {% endif %}
             </div>
             <!-- Modal -->
             <div class="modal fade" id="adminModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -333,29 +361,14 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                    <form method="post">
-                        {% csrf_token %}
-                        <div class="form-floating">
-                            <input type="text" name="username" autofocus="" autocapitalize="none" 
-                            autocomplete="username" maxlength="150" required="" id="id_username" 
-                            fdprocessedid="k0j3b9">
-                            <!-- <input type="email" name="email" class="form-control"
-                                id="floatingInput" placeholder="name@example.com"> -->
-                            <!-- <label for="floatingInput">
-                                Your Username
-                            </label> -->
-                        </div> <br>
-                        <div class="form-floating">
-                            <input type="password" name="password" autocomplete="current-password" 
-                            required="" id="id_password" fdprocessedid="pagkog">
-                            <!-- <input type="password" name="password" class="form-control"
-                                id="password" placeholder="password"> -->
-                            <!-- <label for="password">Password</label> -->
-                        </div> <br>
-                        <!-- <button type="submit" class="btn btn-primary">Login</button> -->
-                        <button type="submit" class="btn btn-outline-primary">
-                            SEND
-                        </button>
+                        <div class="card-header">
+                            --------------------------Worker Login--------------------------
+                          <div class="nav-item {% if request.resolver_match.url_name == 'signup' %}active{% endif %}">
+                            <button class="btn btn-secondary" style="width: 100%; margin-top: 10px;">
+                              <a class="nav-link" href="{% url 'login' %}" style="color: white;">Login</a>
+                            </button>
+                          </div>
+                        </div>
                         <div class="card-footer">
                             --------------------------New to the blog?------------------------
                           <div class="nav-item {% if request.resolver_match.url_name == 'signup' %}active{% endif %}">
@@ -364,7 +377,6 @@
                             </button>
                           </div>
                         </div>
-                    </form>
                 </div>
                     <div class="modal-footer">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
