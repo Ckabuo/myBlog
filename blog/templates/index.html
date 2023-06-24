@@ -50,26 +50,9 @@
                                         <hr class="dropdown-divider">
                                     </li>
                                 {% endfor %}
-                                <li><a class="dropdown-item" href="{% url 'home' %}"> All </a></li>
+                                <li><a class="dropdown-item" href="{% url 'home' %}"> None </a></li>
                             </ul>
                         </li>
-                        {% if is_admin %}
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle blog" href="#" role="button" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                    Admin
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="{% url 'create_category' %}">Create Category </a></li>    
-                                        <li>
-                                            <hr class="dropdown-divider">
-                                        </li>
-                                    <li><a class="dropdown-item" href="{% url 'create_post' %}">Create Post </a></li>    
-                                </ul>
-                            </li>
-                        {% endif %}
-                        
-    
                         <!-- <li class="nav-item">
                             <a class="nav-link blog" href="#">Reviews</a>
                         </li> -->
