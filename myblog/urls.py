@@ -31,4 +31,8 @@ urlpatterns = [
     path('categories/', views.manage_slugs, name= "manage_slugs"),
     path('create_category/', views.create_category, name='create_category'),
     path('posts/<str:c_filter>/', views.home, name='filt_post_list'),
+    path('login/', views.CustomLoginView.as_view(template_name='login.html'), name='login'),
+    path('logout/', views.logout_view, name='logout'),
+    path('signup/', views.signup, name='signup'),
+    path('manage/', views.manage_accounts, name='manage_users'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

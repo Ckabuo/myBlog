@@ -53,20 +53,7 @@
                                 <li><a class="dropdown-item" href="{% url 'home' %}"> All </a></li>
                             </ul>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle blog" href="#" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                Admin
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{% url 'create_category' %}">Create Category </a></li>    
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                <li><a class="dropdown-item" href="{% url 'create_post' %}">Create Post </a></li>    
-                            </ul>
-                        </li>
-    
+
                         <!-- <li class="nav-item">
                             <a class="nav-link blog" href="#">Reviews</a>
                         </li> -->
@@ -197,15 +184,40 @@
                                 </div>
                             </div>
                         </div>
+                        {% if not is_admin %}
+                            <li class="nav-item">
+                                <a class="nav-link blog" href="{% url 'blog:vincheck' %}">
+                                    <span style="color:red;">VIN</span>check
+                                    <span class="position-absolute translate-middle p-2 bg-danger rounded-circle" style="background-color: #ff000f !important; ">
+                                        <span class="visually-hidden">Coming Soon</span>
+                                    </span>
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if is_admin %}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle blog" href="#" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    AdminFunctions
+                                </a>
+                                <ul class="dropdown-menu">
+                                    {% if is_super %}
+                                        <li><a class="dropdown-item" href="{% url 'manage_users' %}"> Manage Users </a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item" href="{% url 'manage_slugs' %}"> Manage Slugs </a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item" href="{% url 'create_category' %}"> Create Category </a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                    {% endif %}
+                                    <li><a class="dropdown-item" href="{% url 'create_post' %}"> Create Post </a></li>
+                                    
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link blog" href="{% url 'logout' %}">LogOut</a>
+                            </li>
+                        {% endif %}
 
-                        <li class="nav-item">
-                            <a class="nav-link blog" href="{% url 'blog:vincheck' %}">
-                                <span style="color:red;">VIN</span>check
-                                <span class="position-absolute translate-middle p-2 bg-danger rounded-circle" style="background-color: #ff000f !important; ">
-                                    <span class="visually-hidden">Coming Soon</span>
-                                </span>
-                            </a>
-                        </li>
                     </ul>
                     <form class="d-flex search-box" role="search">
                         <input class="form-control me-2" type="search" id="search" name="search" placeholder="Search..."
@@ -260,9 +272,11 @@
                                                 <a href="{% url 'blog:post_detail' pk=post.pk %}" class="card-link ">
                                                     <b>Read Mores</b>
                                                 </a>
-                                                <a href="{% url 'blog:delete_post' pk=post.pk %}">
-                                                    del
-                                                </a>
+                                                {% if is_super %}
+                                                    <a href="{% url 'blog:delete_post' pk=post.pk %}">
+                                                        del
+                                                    </a>
+                                                {% endif %}
                                             </div>
                                             <div class="card-footer d-flex justify-content-evenly">
                                                 <i class="fa-regular fa-thumbs-up" onclick="myFunction(this)"></i><span id="likes1" style="position: absolute; left: 24%;bottom: 4px;">0</span>
@@ -296,9 +310,11 @@
                                                 <a href="{% url 'blog:post_detail' pk=para.pk %}" class="card-link ">
                                                     <b>Read Mores</b>
                                                 </a>
-                                                <a href="{% url 'blog:delete_post' pk=para.pk %}">
-                                                    del
-                                                </a>
+                                                {% if is_super %}
+                                                    <a href="{% url 'blog:delete_post' pk=para.pk %}">
+                                                        del
+                                                    </a>
+                                                {% endif %}
                                             </div>
                                             <div class="card-footer d-flex justify-content-evenly">
                                                 <i class="fa-regular fa-thumbs-up" onclick="myFunction(this)"></i><span id="likes1" style="position: absolute; left: 24%;bottom: 4px;">0</span>
@@ -329,10 +345,12 @@
             <div class="sub-header">
                 <h2>Subscribe</h3>
                 <p>Subscribe Now To Get Daily Updates</p>
-                <div class="form-check form-switch ps-5">
-                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" data-bs-toggle="modal" data-bs-target="#adminModal">
-                    <label class="form-check-label" for="flexSwitchCheckDefault"></label>
-                </div> 
+                {% if not is_admin %}
+                    <div class="form-check form-switch ps-5">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" data-bs-toggle="modal" data-bs-target="#adminModal">
+                        <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                    </div>
+                {% endif %}
             </div>
             <!-- Modal -->
             <div class="modal fade" id="adminModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -343,23 +361,22 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                    <form action="">
-                        <div class="form-floating">
-                            <input type="email" name="email" class="form-control"
-                                id="floatingInput" placeholder="name@example.com">
-                            <label for="floatingInput">
-                                Your Email address
-                            </label>
-                        </div> <br>
-                        <div class="form-floating">
-                            <input type="password" name="password" class="form-control"
-                                id="password" placeholder="password">
-                            <label for="password">Password</label>
-                        </div> <br>
-                        <button type="submit" class="btn btn-outline-primary">
-                            SEND
-                        </button>
-                    </form>
+                        <div class="card-header">
+                            --------------------------Worker Login--------------------------
+                          <div class="nav-item {% if request.resolver_match.url_name == 'signup' %}active{% endif %}">
+                            <button class="btn btn-secondary" style="width: 100%; margin-top: 10px;">
+                              <a class="nav-link" href="{% url 'login' %}" style="color: white;">Login</a>
+                            </button>
+                          </div>
+                        </div>
+                        <div class="card-footer">
+                            --------------------------New to the blog?------------------------
+                          <div class="nav-item {% if request.resolver_match.url_name == 'signup' %}active{% endif %}">
+                            <button class="btn btn-secondary" style="width: 100%; margin-top: 10px;">
+                              <a class="nav-link" href="{% url 'signup' %}" style="color: white;">Register as a worker</a>
+                            </button>
+                          </div>
+                        </div>
                 </div>
                     <div class="modal-footer">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -372,21 +389,13 @@
                 
                     {% csrf_token %}
                     <div class="form-group">
-                    <div class="sub-mail" id="email">{{ form.email }}</div>
+                    <div class="sub-mail" id="email">{{ Subform.email }}</div>
                     </div>
                     <button type="submit" class="btn-default">SUBSCRIBE</button>
                 
                 </div>
             </form>
-            <!-- <div class="sub-form" id="subscribe">
-                <form method="post", enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <div class="sub-mail" id="email">{{ form.email }}</div>
-                    <button type="submit" class="btn-default">SUBSCRIBE</button>
-                </form>
-            </div> -->
             <div class="ps-3">
-                
                 <!-- Button trigger modal -->
                 <p class="pt-3 sub-content" data-bs-toggle="modal" data-bs-target="#AdvertModal">
                     <a href="#">Advertise with us</a>
