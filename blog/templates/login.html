@@ -1,10 +1,13 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 {% block content %}
   <div class="container mt-5">
     <div class="row justify-content-center">
       <div class="col-md-6">
         <div class="card">
           <div class="card-header">
-            <h2 class="text-center">Login</h2>
+            <h3 class="text-center">LOGIN</h3>
+            <p>Please enter your credentials to login.</p>
           </div>
           <div class="card-body">
             <form method="post">
@@ -23,24 +26,28 @@
                 <p style="color: red;">Your username and password didn't match. Please try again.</p>
               {% endif %}
 
-              <div class="c-fp">
-                <a href="#" style="margin-left: auto;">Forgot Password?</a>
+              <div>
+                <p class="c-fp">
+                  <a href="#" style="margin-left: auto;">Forgot Password?</a>
+                </p>
               </div>
               
-              <div class="c-arr">
+              <!-- <div class="c-arr">
                 By signing in, you agree to our Terms of Service and Privacy Policy, which we may update from time to time. 
                 We’ll occasionally send you account-related emails.
-              </div>
+              </div> -->
               <div class="form-group text-center">
-                <button type="submit" class="btn btn-primary">Login</button>
+                <button type="submit" class="btn btn-primary"><strong>Login</strong></button>
               </div>
             </form>
 
             <div class="card-footer">
-                --------------------------New to the blog?------------------------
+                <p>
+                  --------------------------New to the blog?------------------------
+                </p>
               <div class="nav-item {% if request.resolver_match.url_name == 'signup' %}active{% endif %}">
-                <button class="btn btn-secondary" style="width: 100%; margin-top: 10px;">
-                  <a class="nav-link" href="{% url 'signup' %}" style="color: white;">SIGNUP</a>
+                <button class="btn">
+                  <a class="nav-link" href="{% url 'signup' %}" style="color: #fff;"><strong>Sign-up</strong></a>
                 </button>              
               </div>
             </div>
@@ -51,30 +58,76 @@
   </div>
   
   <style>
-    .btn-primary{
+    /* Set the background and font styles */
+    body {
+     background: #f8f8f8;
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .card-header{
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .card-header p, .card-footer p{
+      text-align: center;
+      font-size: 14px;
+      color: #888;
+    }
+    .form-group input{
       width: 100%;
-    }
-    .c-arr{
+      padding: 10px;
       margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
     }
-    .c-fp{
+    .form-group button, .btn{
+      width: 100%;
+      padding: 10px;
+      background: #0080ff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .c-fp a, .nav-link{
+      text-decoration: none;
+    }
+    .c-fp a{
+      display: flex;
+      justify-content: flex-end;
+      color: #0080ff;
+    }
+    /* .c-arr{
+      margin-bottom: 10px;
+    } */
+    /* .c-fp{
       display: flex;
       left: auto;
-    }
-    .nav-item{
+    } */
+    /* .nav-item{
       justify-content: center;
       display: flex;
-    }
-    .form-control{
+    } */
+    /* .form-control{
       height: 50px;
       margin-bottom: 5px;
       font-size: 1.2rem;
-    }
-
-    .form-group{
+    } */
+    /* .form-group{
       font-size: 1.3rem;
       margin-bottom: 20px;
-    }
+    } */
   </style>
 
 {% endblock %}

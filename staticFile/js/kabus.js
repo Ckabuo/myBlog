@@ -92,18 +92,30 @@ function vinCheckMethods(id) {
 
 //JS for the Admin toogle buttom
 // Get the toggle button element
-const toggleButton = document.getElementById('flexSwitchCheckDefault');
+const toggleButton = document.getElementById('adminButton');
 
 // Get the modal element
 const modal = document.getElementById('adminModal');
 
 // Add event listener to the toggle button
-toggleButton.addEventListener('change', function() {
-  // Check if the toggle button is switched on
-  if (toggleButton.checked) {
-    // Show the modal
-    $(modal).modal('show');
-  }
+// toggleButton.addEventListener('change', function() {
+//   // Check if the toggle button is switched on
+//   if (toggleButton.checked) {
+//     // Show the modal
+//     $(modal).modal('show');
+//   }else{
+//     //   remove Admin Selection
+//     $('#adminModal').on('hidden.bs.modal', function() {
+//       $('#adminButton').removeClass('active');
+//     });
+//   }
+// });
+
+$(document).ready(function() {
+//   remove Admin Selection
+  $('#myModal').on('hidden.bs.modal', function() {
+    $('#toggleButton').removeClass('active');
+  });
 });
 
 

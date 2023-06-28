@@ -248,7 +248,7 @@
             <!-----Box-9------>
             {% with posts|lenn as pop %}
                 {% for i in pop|index1:0|ranger %}
-                    <div class="container row m-auto">
+                    <div class="container row mt-3">
                         {% if i == pop|index1:0|neg %}
                             {% for j in pop|index1:1|ranger %}
                                 <div class="col-sm-4 blog_post" data-aos="fade-up" data-aos-delay="50" data-aos-duration="1500"
@@ -346,18 +346,21 @@
                 <h2>Subscribe</h3>
                 <p>Subscribe Now To Get Daily Updates</p>
                 {% if not is_admin %}
-                    <div class="form-check form-switch ps-5">
-                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" data-bs-toggle="modal" data-bs-target="#adminModal">
-                        <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                    <div class="">
+                        <a class="text-muted" type="button" role="switch" id="adminButton" data-bs-toggle="modal" data-bs-target="#adminModal">
+                            <strong>
+                                Admin
+                            </strong>
+                        </a>
                     </div>
                 {% endif %}
             </div>
             <!-- Modal -->
-            <div class="modal fade" id="adminModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="adminModal" tabindex="-1" aria-labelledby="adminModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Admin Login</h1>
+                    <h1 class="modal-title fs-5" id="adminModalLabel">Admin Login</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -499,7 +502,7 @@
 
     <footer class="bg-primary">
         <p class="copyright"> <b> copyright 2022 StoryBlock&trade;</b></p>
-        <a href="https://wa.me/+2348148839628?text=Hi,StoryBlock.%20I,m ___">
+        <a href="https://wa.me/+2348131828508?text=Hi,StoryBlock.%20I,m ___">
             <i class="fa-brands fa-whatsapp"></i>
         </a>
         <a href="">

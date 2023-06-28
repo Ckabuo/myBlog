@@ -1,56 +1,95 @@
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 {% load custom_temp %}
 {% block content %}
 
   <div class="container">
     <button class="btn-primary" style="float: right; margin-top: 10px;">
-      <a href="{% url 'home' %}" style="color: #000; text-decoration: none;"> Back </a>
+      <a href="{% url 'home' %}" style="color: #000; text-decoration: none;"><strong>Back</strong></a>
     </button>
-    <h2>Create a new post</h2>
+    <div class="create-post-header">
+      <h3>CREATE POST</h3>
+      <p>Write a new blog post.</p>
+    </div>
+    
     <hr>
-    {% if form.errors %}
-      <p style="color: red;">{{ form.errors.as_text }}</p>
-    {% endif %}
-    <form method="post" enctype="multipart/form-data">
-      {% csrf_token %}
-      <div class="form-group">
-        <label for="{{ form.title.id_for_label }}">Title:</label>
-        <div>{{ form.title }}</div>
-      </div>
+      <div class="create-post-page">
+          {% if form.errors %}
+          <p style="color: red;">{{ form.errors.as_text }}</p>
+          {% endif %}
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="form-group create-post-form input">
+            <label for="{{ form.title.id_for_label }}">Title</label>
+            <div>{{ form.title }}</div>
+          </div>
 
-      <div class="form-group">
-        <label for="{{ form.content.id_for_label }}">Content:</label>
-        <div>{{ form.body|add_class:"form-control"|attr:"style:width:90%" }}</div>
-      </div>
+          <div class="form-group create-post-form textarea">
+            <label for="{{ form.content.id_for_label }}">Content:</label>
+            <div>{{ form.body|add_class:"form-control"|attr:"style:width:90%" }}</div>
+          </div>
 
-      <div class="form-group">
-        <label for="{{ form.categories.id_for_label }}">Categories:</label>
-        <div>{{ form.categories }}</div>
-      </div>
+          <div class="form-group">
+            <label for="{{ form.categories.id_for_label }}">Categories</label>
+            <div>{{ form.categories }}</div>
+          </div>
 
-      <div class="form-group">
-        <label for="{{ form.cover_image.id_for_label }}">Cover Image:</label>
-        <div>{{ form.cover_image }}</div>
-      </div>
+          <div class="form-group">
+            <label for="{{ form.cover_image.id_for_label }}">Cover Image</label>
+            <div>{{ form.cover_image }}</div>
+          </div>
 
-      <button type="submit" class="btn btn-primary" >Save</button>
-    </form>
+          <button type="submit" class="btn button" ><strong>Create Post</strong></button>
+        </form>
+      </div>
+    
   </div>
 
   <style>
-    form{
-      justify-content: center;
-      align-items: center;
-      display: grid;
-      height: 100vh;
+    .create-post-page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
     }
-    
-    textarea.form-control{
-      min-height: 400px;
+    .create-post-header {
+      text-align: center;
+      margin-bottom: 20px;
+      margin-top: 20px;
     }
-    .btn{
-      background-color: #ff000f;
-      color: #fff
-      ;
+    .create-post-header h3 {
+      font-size: 24px;
+      margin-bottom: 5px;
     }
+    .create-post-header p {
+      color: #888;
+    }
+    form {
+      background: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .create-post-form input, .create-post-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .form-group{
+      margin-bottom: 15px;
+    }
+    .button{
+      width: 100%;
+      padding: 10px;
+      background: #0080ff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+  }
   </style>
 {% endblock %}
