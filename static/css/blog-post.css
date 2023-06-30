@@ -78,11 +78,10 @@ main {
     box-sizing: border-box;
 }
 
-article h2 {
+/* article h2 {
     color: red;
-    font-size: 40px;
-    text-decoration: underline;
-}
+    text-decoration: none;
+} */
 
 article p {
     line-height: 2em;
