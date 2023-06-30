@@ -1,4 +1,6 @@
-<!-- create_category.html -->
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 {% block content %}
   <button class="btn btn-primary" style="float: right; margin-top: 10px;">
@@ -11,7 +13,10 @@
   <h1>Create a New Category</h1>
   <hr>
 <div class="container-fluid card">
-  Avalible Categories:
+  <div>
+    <strong>
+      Avalible Categories:
+    </strong>
     {% for category in categories %}
     <label style="background-color: aqua; padding: 3px;border-radius: 3px;padding-top:0px;">{{ category.name }}</label>
     {% endfor %}
@@ -19,18 +24,56 @@
     {% if form.errors %}
       <p style="color: red;">{{ form.errors.as_text }}</p>
     {% endif %}
-  <form method="post">
-    {% csrf_token %}
-        {{ form.as_p }}
-    <button type="submit" class="btn btn-primary" style="background-color: #0d6efd; color: #fff;">Create</button>
-  </form>
+    <form method="post">
+      {% csrf_token %}
+          {{ form.as_p }}
+      <div class="submitButton">
+       <button type="submit" class="btn btn-primary" style="background-color: #0d6efd; color: #fff;">Create</button> 
+      </div> 
+    </form>
+  </div>
+  
 </div>
 <style>
-   .container-fluid{
-    
+  body{
+    background: #f8f8f8;
+    font-family: Arial, sans-serif;
+  }
+  .card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: stretch;
+    height: 100vh;
+  }
+  form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  } 
+  form input{
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  .submitButton{
     text-align: center;
-    }
-    
+  }
+  form button{
+    width: 70%;
+    padding: 10px;
+    background: #0080ff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
     /* textarea.form-control{
       min-height: 400px; */
     /* }
