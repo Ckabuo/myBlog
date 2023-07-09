@@ -259,7 +259,7 @@ img {
     z-index: 99;
     border: none;
     outline: none;
-    /* background-color:  */
+    background-color: red;
     color: white;
     cursor: pointer;
     /* padding: 15px; */

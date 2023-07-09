@@ -4,23 +4,78 @@
 
 {% block content %}
   <button class="btn btn-primary" style="background-color: #000; float: right; margin-top: 10px;">
-    <a href="{% url 'create_category' %}" style="color: #fff; text-decoration: none;">
+    <a href="{% url 'home' %}" style="color: #fff; text-decoration: none;">
       <strong>Back</strong>
     </a>
   </button>
   <h1>Manage Categories</h1>
   <hr>
-  Avalible Categories:
-  {% if form.errors %}
-      <p style="color: red;">{{ form.errors.as_text }}</p>
-    {% endif %}
-  {% for category in categories %}
-    <div style="margin-top: 5px;">
-        <label>{{ category.name }}:</label>
-        <button class="btn btn-primary" style="background-color: red;border-color: red;margin-left: 20px;">
-            <a href="{% url 'delete_category' slug=category.slug %}" style="color: white;">Delete</a>
+  <div class="page">
+    <h1>Avalible Categories</h1>
+    {% if form.errors %}
+        <p style="color: red;">{{ form.errors.as_text }}</p>
+      {% endif %}
+    {% for category in categories %}
+    <div class="category-list" >
+      <div class="category" style="margin-top: 5px;">
+        <label><strong>
+          {{ category.name }}
+        </strong></label>
+        <button class="delete-button">
+          <a href="{% url 'delete_category' slug=category.slug %}">
+            <strong>Delete</strong>
+          </a>
         </button>
+      </div>
     </div>
+      
     {% endfor %}
+  </div>
+  
     
+    <style>
+      body {
+        background: #f8f8f8;
+        font-family: Arial, sans-serif;
+      }
+      .page {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .category-list{
+        width: 400px;
+      }
+      .category{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        background-color: #fff;
+        border-radius: 5px;
+        margin-bottom: 10px;
+      }
+      .delete-button{
+        background-color: #0080ff;
+        border-radius: 10px;
+        padding: 10px;
+        text-align: center;
+        font-size: 14px;
+        border: none;
+        cursor: pointer;
+      }
+      .delete-button:hover {
+        background-color: red;
+        color: #0d0d0d;
+      }
+      .delete-button a{
+        color: #fff;
+        text-decoration: none;
+      }
+      .delete-button a:hover {
+        color: #0d0d0d;
+      }    
+    </style>
 {% endblock %}
